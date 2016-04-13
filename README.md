@@ -15,3 +15,16 @@ Replace the original files [MacOS]
     
     sudo cp ~/Downloads/UnlimitedJCEPolicy/local_policy.jar $(find $(/usr/libexec/java_home -v 1.8) -name local_policy.jar)
     sudo cp ~/Downloads/UnlimitedJCEPolicy/US_export_policy.jar $(find $(/usr/libexec/java_home -v 1.8) -name US_export_policy.jar)
+    
+    
+You should be able to select the faster-but-slightly-less-secure /dev/urandom on Linux using:
+
+    -Djava.security.egd=file:/dev/urandom
+
+However, this doesn't work with Java 5 and later (Java Bug 6202721). The suggested work-around is to use:
+
+    -Djava.security.egd=file:/dev/./urandom
+
+
+env:
+JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
